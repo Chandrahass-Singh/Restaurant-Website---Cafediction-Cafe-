@@ -43,4 +43,4 @@ Restaurant/
 If you'd like to collaborate, connect, or suggest improvements:
 
 GitHub: @Chandrahass-Singh
-Email: your-email@example.com
+Email: chandrahass2002@gmail.com
