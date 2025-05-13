@@ -1,0 +1,196 @@
+@media(max-width:1199px){
+
+    /*----- General Style -----*/
+    .sub-title {
+        padding-bottom: 8px;
+    }
+    #main {
+        padding-top: 82px;
+    }
+    .page-banner {
+        padding: 80px 0px;
+        .sub-page-title {
+            font-size: 34px;
+            line-height: 45px;
+        }
+    }
+    .left-container {
+        padding-right: 30px;
+    }
+    .right-container {
+        padding-left: 30px;
+    }
+
+    /*----- Heading Style -----*/
+    h1 {
+        font-size: 45px;
+        line-height: 55px;
+    }
+    h2 {
+        font-size: 34px;
+    }
+    h4 {
+        font-size: 26px;
+    }
+    h5 {
+        font-size: 20px;
+    }
+    h6 {
+        font-size: 18px;
+    }
+
+    /*----- Spacer Style -----*/
+    .ptb-100 {
+        padding-top: 80px;
+        padding-bottom: 80px;
+    }
+    .pt-100 {
+        padding-top: 80px;
+    }
+    .pb-100 {
+        padding-bottom: 80px;
+    }
+    .pb-75 {
+        padding-bottom: 55px;
+    }
+    .pb-65 {
+        padding-bottom: 45px;
+    }
+
+    .mtb-100 {
+        margin-top: 80px;
+        margin-bottom: 80px;
+    }
+    .mt-100 {
+        margin-top: 80px;
+    }
+    .mb-100 {
+        margin-bottom: 80px;
+    }
+
+    /*----- Header css -----*/
+    .main-menu {
+        .menu {
+            > ul {
+                justify-content: center;
+                > li {
+                    margin: 0px 18px;
+                    > a {
+                        font-size: 14px;
+                        padding: 28px 0px;
+                    }
+                    &.has-child-iteam {
+                        &:before{
+                            right: -13px;
+                            font-size: 16px;
+                        }
+                    }
+
+                    ul {
+                        li{
+                            a{
+                                font-size: 14px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .menu-icon {
+            > ul {
+                > li {
+                    > a {
+                        padding: 28px 0px;
+                    }
+                    &.cart {
+                        .count {
+                            top: 16px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /*----- Home Page -----*/
+    .home-banner {
+        height: calc(100vh - 76px);
+    }
+    .about-img-part {
+        padding-right: 50px;
+    }
+    .top-recipes-slider {
+        margin-bottom: 40px;
+    }
+    .service-img {
+        padding-bottom: 15px;
+    }
+    .service-title {
+        padding-bottom: 10px;
+    }
+    .testimonial-user-img {
+        margin-bottom: 20px;
+    }
+    .testimonial-title {
+        padding-bottom: 15px;
+    }
+
+    /*----- Team Page -----*/
+    .team-box {
+        &:nth-child(even) {
+            margin-top: 0px;
+        }
+        &:nth-child(3n + 2) {
+            margin-top: 35px;
+        }
+    }
+
+    /*----- Reservation Page -----*/
+    .reservation-img {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    .reservation {
+        form {
+            .button {
+                margin-top: 10px;
+            }
+        }
+    }
+
+    /*----- Contact Page -----*/
+    .info-box {
+        padding: 25px 25px;
+    }
+    .contact-form {
+        h3 {
+            font-size: 26px;
+        }
+    }
+    .map-section {
+        iframe {
+            height: 400px;
+        }
+    }
+
+    /*----- Blog Detail Page -----*/
+    .blog-detail-title {
+        font-size: 26px;
+    }
+    .blog-img-detail {
+        padding-top: 20px;
+        padding-bottom: 30px;
+    }
+    /*----- Shop Detail Page -----*/
+    .related-product{
+        padding-bottom: 50px;
+    }
+    .review-count {
+        padding-right: 30px;
+    }
+    .add-cart-box {
+        .cart-button {
+            padding-bottom: 15px;
+        }
+    }
+}
