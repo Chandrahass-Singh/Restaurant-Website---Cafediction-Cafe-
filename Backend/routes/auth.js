@@ -55,9 +55,10 @@ router.post('/forgot-password', async (req, res) => {
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: 'chandrahass2002@gmail.com',
-                pass: 'cbvm zdrv sakv izmv' // ✅ Your App password
+                user: process.env.EMAIL_USER,
+                pass: process.env.EMAIL_PASS
             }
+
         });
 
         const otp = Math.floor(100000 + Math.random() * 900000); // 6-digit OTP

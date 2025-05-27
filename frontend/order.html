@@ -131,6 +131,9 @@
                     <label for="phone">Phone:</label>
                     <input type="tel" id="phone" name="phone" required>
 
+                    <label for="table-number">Table Number:</label>
+<input type="number" id="table-number" name="table-number" min="1" required>
+
                     <button type="submit">Place Order</button>
                 </form>
                 <div id="order-summary" class="alert alert-success shadow-sm"
@@ -196,6 +199,8 @@
         
                 const name = document.getElementById("name").value;
                 const phone = document.getElementById("phone").value;
+                const tableNumber = document.getElementById("table-number").value;
+
         
                 if (cart.length === 0) {
                     alert("Your cart is empty! Please add items before placing an order.");
@@ -203,7 +208,7 @@
                 }
         
                 const totalPrice = cart.reduce((sum, item) => sum + item.price, 0);
-                const orderData = { name, phone, items: cart, totalPrice, paymentMethod: "Cash on Delivery" };
+                const orderData = { name, phone,tableNumber, items: cart, totalPrice, paymentMethod: "Cash on Delivery" };
         
                 console.log("Sending Order:", JSON.stringify(orderData, null, 2));
         
@@ -216,11 +221,14 @@
         
                     const result = await response.json();
                     if (response.ok) {
-                        const summary = `
-                            <h4 style="color: #155724;">✅ Thank you, ${name}!</h4>
-                            <p>Your order has been placed with Cash on Delivery.</p>
-                            <ul>${cart.map(item => `<li>${item.quantity}x ${item.name} - ₹${item.price.toFixed(2)}</li>`).join('')}</ul>
-                            <p><strong>Total: ₹${totalPrice.toFixed(2)}</strong></p>`;
+                const summary = `
+                <h4 style="color: #155724;">✅ Thank you, ${name}!</h4>
+                <p>Your order for <strong>Table #${tableNumber}</strong> has been placed with Cash on Delivery.</p>
+                <ul>${cart.map(item => `<li>${item.quantity}x ${item.name} - ₹${item.price.toFixed(2)}</li>`).join('')}</ul>
+                <p><strong>Total: ₹${totalPrice.toFixed(2)}</strong></p>`;
+    
+
+
                         
                         document.getElementById("order-summary").innerHTML = summary;
                         document.getElementById("order-summary").style.display = "block";
