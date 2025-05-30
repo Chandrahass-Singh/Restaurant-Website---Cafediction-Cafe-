@@ -213,7 +213,7 @@
                 console.log("Sending Order:", JSON.stringify(orderData, null, 2));
         
                 try {
-                    const response = await fetch("http://localhost:3000/orders", {
+                    const response = await fetch("http://cafediction-cafe.onrender.com/orders", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify(orderData),

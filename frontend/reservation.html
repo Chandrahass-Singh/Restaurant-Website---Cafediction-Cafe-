@@ -141,7 +141,7 @@ style="display: none; padding: 15px; background-color: #d8f3dc; color: #1b4332; 
         // 🔁 Fetch fully booked dates from backend
         let booked = [];
         try {
-            const res = await fetch("http://localhost:3000/api/booked-dates");
+            const res = await fetch("http://cafediction-cafe.onrender.com/api/booked-dates");
             booked = await res.json();
         } catch (err) {
             console.error("Error fetching booked dates:", err);
@@ -174,7 +174,7 @@ style="display: none; padding: 15px; background-color: #d8f3dc; color: #1b4332; 
             console.log("Sending Reservation:", reservationData);
 
             try {
-                const response = await fetch("http://localhost:3000/reservations", {
+                const response = await fetch("http://cafediction-cafe.onrender.com/reservations", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(reservationData),
