@@ -1,0 +1,13 @@
+@media(max-width:1400px){
+
+    .owl-nav {
+        button {
+            &.owl-next {
+                right: -50px;
+            }
+            &.owl-prev {
+                left: -50px;
+            }
+        }
+    }
+}

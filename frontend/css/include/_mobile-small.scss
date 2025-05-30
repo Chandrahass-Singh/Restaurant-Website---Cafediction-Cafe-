@@ -1,0 +1,19 @@
+@media(max-width:480px){
+    .from-gallery {
+        ul {
+            li {
+                width: calc(100% / 3);
+            }
+        }
+    }
+    .sold-product {
+        display: block;
+        padding-top: 15px;
+    }
+    .add-cart-box {
+        .cart-button {
+            padding: 20px 0px;
+            width: 100%;
+        }
+    }
+}
