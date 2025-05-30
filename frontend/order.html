@@ -146,106 +146,111 @@
 
         
 
-        <script>
-            let cart = [];
-        
-            function addToCart() {
-                const itemSelect = document.getElementById("menu-item");
-                const quantity = parseInt(document.getElementById("quantity").value);
-                const price = parseFloat(itemSelect.options[itemSelect.selectedIndex].getAttribute("data-price"));
-        
-                if (!itemSelect.value) {
-                    alert("Please select an item.");
-                    return;
-                }
-        
-                const existingIndex = cart.findIndex(item => item.name === itemSelect.value);
-                const totalPrice = quantity * price;
-        
-                if (existingIndex !== -1) {
-                    cart[existingIndex].quantity += quantity;
-                    cart[existingIndex].price += totalPrice;
-                } else {
-                    cart.push({ name: itemSelect.value, quantity, price: totalPrice });
-                }
-        
-                updateCart();
-            }
-        
-            function updateCart() {
-                const cartList = document.getElementById("cart-list");
-                let total = 0;
-                cartList.innerHTML = "";
-        
-                cart.forEach((item, index) => {
-                    total += item.price;
-                    cartList.innerHTML += `
-                        <li>
-                            ${item.quantity}x ${item.name} - ₹${item.price.toFixed(2)}
-                            <button onclick="removeItem(${index})" style="margin-left: 10px; color: red; border: none; background: none;">❌</button>
-                        </li>`;
-                });
-        
-                document.getElementById("total-price").innerText = total.toFixed(2);
-            }
-        
-            function removeItem(index) {
-                cart.splice(index, 1);
-                updateCart();
-            }
-        
-            document.getElementById("order-form").addEventListener("submit", async function (e) {
-                e.preventDefault();
-        
-                const name = document.getElementById("name").value;
-                const phone = document.getElementById("phone").value;
-                const tableNumber = document.getElementById("table-number").value;
+       <script>
+    const API_BASE_URL = "https://cafediction-cafe.onrender.com"; // ✅ Always use HTTPS in production
 
-        
-                if (cart.length === 0) {
-                    alert("Your cart is empty! Please add items before placing an order.");
-                    return;
-                }
-        
-                const totalPrice = cart.reduce((sum, item) => sum + item.price, 0);
-                const orderData = { name, phone,tableNumber, items: cart, totalPrice, paymentMethod: "Cash on Delivery" };
-        
-                console.log("Sending Order:", JSON.stringify(orderData, null, 2));
-        
-                try {
-                    const response = await fetch("http://cafediction-cafe.onrender.com/orders", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify(orderData),
-                    });
-        
-                    const result = await response.json();
-                    if (response.ok) {
-                const summary = `
-                <h4 style="color: #155724;">✅ Thank you, ${name}!</h4>
-                <p>Your order for <strong>Table #${tableNumber}</strong> has been placed with Cash on Delivery.</p>
-                <ul>${cart.map(item => `<li>${item.quantity}x ${item.name} - ₹${item.price.toFixed(2)}</li>`).join('')}</ul>
-                <p><strong>Total: ₹${totalPrice.toFixed(2)}</strong></p>`;
-    
+    let cart = [];
 
+    function addToCart() {
+        const itemSelect = document.getElementById("menu-item");
+        const quantity = parseInt(document.getElementById("quantity").value);
+        const price = parseFloat(itemSelect.options[itemSelect.selectedIndex].getAttribute("data-price"));
 
-                        
-                        document.getElementById("order-summary").innerHTML = summary;
-                        document.getElementById("order-summary").style.display = "block";
-        
-                        cart = [];
-                        document.getElementById("cart-list").innerHTML = "";
-                        document.getElementById("total-price").innerText = "0.00";
-                        document.getElementById("order-form").reset();
-                    } else {
-                        alert(result.message || "Order failed");
-                    }
-                } catch (err) {
-                    console.error("Order Error:", err);
-                    alert("Something went wrong. Please try again.");
-                }
+        if (!itemSelect.value) {
+            alert("Please select an item.");
+            return;
+        }
+
+        const existingIndex = cart.findIndex(item => item.name === itemSelect.value);
+        const totalPrice = quantity * price;
+
+        if (existingIndex !== -1) {
+            cart[existingIndex].quantity += quantity;
+            cart[existingIndex].price += totalPrice;
+        } else {
+            cart.push({ name: itemSelect.value, quantity, price: totalPrice });
+        }
+
+        updateCart();
+    }
+
+    function updateCart() {
+        const cartList = document.getElementById("cart-list");
+        let total = 0;
+        cartList.innerHTML = "";
+
+        cart.forEach((item, index) => {
+            total += item.price;
+            cartList.innerHTML += `
+                <li>
+                    ${item.quantity}x ${item.name} - ₹${item.price.toFixed(2)}
+                    <button onclick="removeItem(${index})" style="margin-left: 10px; color: red; border: none; background: none;">❌</button>
+                </li>`;
+        });
+
+        document.getElementById("total-price").innerText = total.toFixed(2);
+    }
+
+    function removeItem(index) {
+        cart.splice(index, 1);
+        updateCart();
+    }
+
+    document.getElementById("order-form").addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const name = document.getElementById("name").value;
+        const phone = document.getElementById("phone").value;
+        const tableNumber = document.getElementById("table-number").value;
+
+        if (cart.length === 0) {
+            alert("Your cart is empty! Please add items before placing an order.");
+            return;
+        }
+
+        const totalPrice = cart.reduce((sum, item) => sum + item.price, 0);
+        const orderData = {
+            name,
+            phone,
+            tableNumber,
+            items: cart,
+            totalPrice,
+            paymentMethod: "Cash on Delivery"
+        };
+
+        try {
+            const response = await fetch(`${API_BASE_URL}/orders`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(orderData),
+                // credentials: "include" // Uncomment if backend uses cookies
             });
-        </script>
+
+            const result = await response.json();
+            if (response.ok) {
+                const summary = `
+                    <h4 style="color: #155724;">✅ Thank you, ${name}!</h4>
+                    <p>Your order for <strong>Table #${tableNumber}</strong> has been placed with Cash on Delivery.</p>
+                    <ul>${cart.map(item => `<li>${item.quantity}x ${item.name} - ₹${item.price.toFixed(2)}</li>`).join('')}</ul>
+                    <p><strong>Total: ₹${totalPrice.toFixed(2)}</strong></p>`;
+
+                document.getElementById("order-summary").innerHTML = summary;
+                document.getElementById("order-summary").style.display = "block";
+
+                cart = [];
+                document.getElementById("cart-list").innerHTML = "";
+                document.getElementById("total-price").innerText = "0.00";
+                document.getElementById("order-form").reset();
+            } else {
+                alert(result.message || "Order failed");
+            }
+        } catch (err) {
+            console.error("Order Error:", err);
+            alert("Something went wrong. Please try again.");
+        }
+    });
+</script>
+
         
 
 

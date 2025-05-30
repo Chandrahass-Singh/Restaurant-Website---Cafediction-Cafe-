@@ -133,6 +133,8 @@ style="display: none; padding: 15px; background-color: #d8f3dc; color: #1b4332; 
 </div>
 
 <script>
+    const API_BASE_URL = "https://cafediction-cafe.onrender.com"; // ✅ Use HTTPS always in production
+
     document.addEventListener("DOMContentLoaded", async function () {
         const dateInput = document.getElementById("date");
         const today = new Date().toISOString().split("T")[0];
@@ -141,7 +143,7 @@ style="display: none; padding: 15px; background-color: #d8f3dc; color: #1b4332; 
         // 🔁 Fetch fully booked dates from backend
         let booked = [];
         try {
-            const res = await fetch("http://cafediction-cafe.onrender.com/api/booked-dates");
+            const res = await fetch(`${API_BASE_URL}/api/booked-dates`);
             booked = await res.json();
         } catch (err) {
             console.error("Error fetching booked dates:", err);
@@ -174,10 +176,11 @@ style="display: none; padding: 15px; background-color: #d8f3dc; color: #1b4332; 
             console.log("Sending Reservation:", reservationData);
 
             try {
-                const response = await fetch("http://cafediction-cafe.onrender.com/reservations", {
+                const response = await fetch(`${API_BASE_URL}/reservations`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(reservationData),
+                    // credentials: "include" // Optional if cookies are involved
                 });
 
                 const result = await response.json();
@@ -200,6 +203,7 @@ style="display: none; padding: 15px; background-color: #d8f3dc; color: #1b4332; 
         });
     });
 </script>
+
 
     </main>
             <!-- 💬 Custom popup container -->
