@@ -131,9 +131,8 @@
             <div id="reservation-popup"
 style="display: none; padding: 15px; background-color: #d8f3dc; color: #1b4332; border: 1px solid #95d5b2; border-radius: 8px; width: fit-content; margin: 20px auto; text-align: center; font-weight: bold;">
 </div>
-
 <script>
-    const API_BASE_URL = "https://cafediction-cafe.onrender.com"; // ✅ Use HTTPS always in production
+    const API_BASE_URL = "https://cafediction-backend.onrender.com"; // ✅ Use HTTPS always in production
 
     document.addEventListener("DOMContentLoaded", async function () {
         const dateInput = document.getElementById("date");
@@ -179,8 +178,7 @@ style="display: none; padding: 15px; background-color: #d8f3dc; color: #1b4332; 
                 const response = await fetch(`${API_BASE_URL}/reservations`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(reservationData),
-                    // credentials: "include" // Optional if cookies are involved
+                    body: JSON.stringify(reservationData)
                 });
 
                 const result = await response.json();
