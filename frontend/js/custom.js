@@ -428,7 +428,7 @@ document.getElementById("signup-form")?.addEventListener("submit", async (e) => 
     console.log("Sending signup request with:", { name, email, password });
 
     try {
-        const response = await fetch("http://localhost:3000/auth/signup", {
+        const response = await fetch("http://cafediction-backend.onrender.com/auth/signup", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ name, email, password }),
@@ -453,7 +453,7 @@ document.getElementById("login-form")?.addEventListener("submit", async (e) => {
     console.log("Sending login request with:", { email, password });
 
     try {
-        const response = await fetch("http://localhost:3000/auth/login", {
+        const response = await fetch("http://cafediction-backend.onrender.com/auth/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, password }),

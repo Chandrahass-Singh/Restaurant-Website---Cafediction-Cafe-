@@ -14,14 +14,17 @@ mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })
-.then(() => console.log("MongoDB connected"))
-.catch((err) => console.error("MongoDB connection error:", err));
+    .then(() => console.log("MongoDB connected"))
+    .catch((err) => console.error("MongoDB connection error:", err));
 
 // CORS setup with allowed origins
 const allowedOrigins = [
-    "https://restaurant-website-cafediction-git-7eccf0-chandrahass-projects.vercel.app",
-    "http://localhost:3000"
+  "http://localhost:3000", // for development
+  "https://restaurant-website-cafediction-cafe-mrkh.vercel.app", // main production link
+  "https://restaurant-website-cafediction-git-7eccf0-chandrahass-projects.vercel.app", // preview/staging
+  "https://restaurant-website-cafediction-cafe-mrkh-jevav2mrv.vercel.app" // another deployment/preview
 ];
+
 
 app.use(cors({
     origin: function (origin, callback) {
@@ -32,6 +35,12 @@ app.use(cors({
         }
     }
 }));
+
+app.use((req, res, next) => {
+    console.log("CORS Origin:", req.headers.origin);
+    next();
+});
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
